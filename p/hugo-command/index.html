@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\nGit 常用命令速查（README 带注释版） 1、Git 配置命令 1 2 3 4 5 6 7 8 9 10 11 12 13 git config -l # 查看当前生效的所有 Git 配置（多层级汇总） git config --system --list # 查看系统级配置（针对整台电脑） git config --global --list # 查看用户级配置（当前用户） git config --local --list # 查看当前仓库的本地配置（需在仓库目录中执行） \u200b git config --global user.name &#34;Your Name&#34; # 设置全局用户名 git config --global user.email &#34;you@example.com&#34; # 设置全局邮箱 git config --global init.defaultBranch main # 设置新建仓库默认分支为 main \u200b git config --global core.ignorecase false # 让 Git 区分大小写文件名 git config --global pull.rebase false # pull 默认使用 merge，可改为 true 变为 rebase git config --global merge.ff only # 禁止非快进合并 git config --global fetch.prune true # 拉取时自动清理已删除的远程分支 2、基本命令 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 git init # 在当前目录初始化一个新的 Git 仓库 git clone &lt;url&gt; # 从 url 的远程地址克隆整个仓库到本地 git clone --depth=1 &lt;url&gt; # 从 url 克隆最近一次提交（浅克隆），加快速度 git clone --branch &lt;branch&gt; &lt;url&gt; # 从 url 克隆指定分支 &lt;branch&gt; 的仓库 \u200b git status # 显示工作区、暂存区状态 git diff # 比较工作区与暂存区的差异 git diff --staged # 比较暂存区与最新提交的差异 git show &lt;commit&gt; # 查看指定提交的详细内容 \u200b git add &lt;file&gt; # 将指定文件加入暂存区 git add -A # 将所有修改、删除、创建文件加入暂存区 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） git commit -m &#34;提交信息&#34; # 创建一个新提交 git commit --amend # 修改最近一次提交（信息或包含新改动） \u200b git mv &lt;old&gt; &lt;new&gt; # 重命名文件并记录到版本历史 git rm &lt;file&gt; # 删除文件并记录到版本历史(工作区和暂存区同时删除) git rm --cacged &lt;file&gt; # 删除文件并记录到版本历史(删除暂存区文件，不删工作区) 3、分支与合并 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 git branch # 查看所有本地分支 git branch -vv # 查看分支及其上游分支与最近提交 git branch -d &lt;branch&gt; # 删除已经合并的分支 git branch -D &lt;branch&gt; # 强制删除分支 \u200b git switch &lt;branch&gt; # 切换到已存在的分支 git switch -c &lt;new-branch&gt; # 创建并切换到新分支 &lt;new-branch&gt; git merge &lt;branch&gt; # 将指定分支合并到当前分支 git merge --no-ff &lt;branch&gt; # 禁用快进合并，保留合并提交 \u200b git rebase &lt;base-branch&gt; # 将当前分支变基到指定分支之上 git rebase -i &lt;base&gt; # 交互式变基，可编辑、压缩提交 git rebase --abort # 取消正在进行的变基操作 git rebase --continue # 解决冲突后继续变基 \u200b git cherry-pick &lt;commit&gt; # 将某次提交应用到当前分支 git revert &lt;commit&gt; # 生成一个新的提交来撤销指定提交 4、远程协作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 git remote -v # 查看所有已配置的远程仓库地址 git remote add origin &lt;url&gt; # 添加名为 origin 的远程仓库 git remote remove origin # 删除名为 origin 的远程仓库 git remote set-url origin &lt;new-url&gt; # 修改 origin 的远程地址 \u200b git fetch # 从远程拉取最新引用和对象，不自动合并 git fetch -p # 拉取同时清理已删除的远程分支引用 git pull # 相当于 fetch + merge git pull --rebase # 拉取后用 rebase 合并，保持线性历史 \u200b git push # 推送当前分支到远程 git push -u origin &lt;branch&gt; # 推送当前分支并设置上游 git push origin --delete &lt;branch&gt; # 删除远程分支 git push --tags # 推送本地所有标签到远程 5、日志与追溯 1 2 3 4 5 6 git log # 查看提交历史 git log --oneline --graph --decorate # 简洁图形化查看历史 git log -p # 查看每次提交包含的补丁 git shortlog -sn # 按作者统计提交次数 git blame &lt;file&gt; # 查看文件每行由谁何时修改 git reflog # 查看 HEAD 和分支引用的变动历史 6、回退与恢复 1 2 3 4 5 6 7 git reset --soft &lt;commit&gt; # 回退到指定提交，保留工作区和暂存区 git reset --mixed &lt;commit&gt; # 回退到指定提交，保留工作区，清空暂存区 git reset --hard &lt;commit&gt; # 回退到指定提交，丢弃暂存区和工作区改动 （默认） \u200b git restore &lt;file&gt; # 用暂存区的内容覆盖工作区文件 git restore --source=&lt;commit&gt; &lt;file&gt; # 用指定提交的内容覆盖工作区文件 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） 7、暂存更改（stash） 1 2 3 4 5 6 7 8 git stash push -m &#34;说明&#34; # 暂存当前所有更改到一个命名的 stash git stash push -u -m &#34;说明&#34; # 包括未跟踪文件一起暂存 git stash list # 查看 stash 列表 git stash show -p stash@{0} # 查看指定 stash 的改动详情 git stash pop # 恢复最近一个 stash 并删除它 git stash apply stash@{n} # 恢复指定 stash 但保留它 git stash drop stash@{n} # 删除指定 stash git stash clear # 删除所有 stash（危险操作） 8、标签（tag） 1 2 3 4 5 6 git tag # 查看本地所有标签 git tag v1.0.0 # 创建轻量标签 git tag -a v1.0.0 -m &#34;发布说明&#34; # 创建带说明的注解标签 git show v1.0.0 # 查看标签信息 git push origin v1.0.0 # 推送单个标签到远程 git push origin --tags # 推送所有标签到远程 9、常见工作流 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 git init # 初始化仓库 git add -A # 添加所有改动到暂存区 git commit -m &#34;chore: initial commit&#34; # 首次提交 git branch -M main # 重命名分支为 main git remote add origin &lt;url&gt; # 绑定远程仓库 git push -u origin main # 推送 main 分支并建立跟踪关系 \u200b git switch -c feature/login # 新建功能分支并切换 git add -A # 提交前添加所有修改 git commit -m &#34;feat(login): basic form&#34; # 提交功能代码 git push -u origin feature/login # 推送到远程 \u200b git switch feature/login # 切回功能分支 git fetch origin # 拉取远程更新 git rebase origin/main # 将分支变基到最新 main git push --force-with-lease # 强制推送（安全模式） \u200b git switch main # 切回主分支 git pull # 更新主分支 git tag -a v1.2.0 -m &#34;Release v1.2.0&#34; # 打标签发布 git push origin v1.2.0 # 推送标签到远程 10、冲突解决 1 2 3 4 5 git add &lt;冲突文件&gt; # 解决冲突后标记文件为已解决 git merge --continue # 继续合并 git rebase --continue # 继续变基 git merge --abort # 放弃合并回到合并前状态 git rebase --abort # 放弃变基回到开始前状态 11、找回丢失提交 1 2 3 git reflog # 找到需要回退的提交或 HEAD@{n} git reset --hard &lt;that-commit&gt; # 回到该提交（危险，丢弃未提交改动） git revert &lt;that-commit&gt; # 创建一个新的提交反做该提交 12、搜索与清理 1 2 3 4 5 git grep &#34;keyword&#34; # 搜索关键字 git grep -n &#34;keyword&#34; -- &lt;path&gt; # 搜索指定路径并显示行号 \u200b git clean -fd # 删除未跟踪文件和目录 git clean -fdx # 包含 .gitignore 忽略的文件（危险） git fetch 部分 1 2 3 4 5 git fetch # 从远程仓库拉取最新引用和对象，不自动合并 git fetch -p # 拉取并清理远程已删除的分支引用（prune） git fetch --all # 拉取所有远程的所有分支 git fetch origin main # 仅拉取 origin 的 main 分支 git fetch --tags # 仅获取远程的标签 git rm 部分 1 2 3 4 git rm &lt;file&gt; # 删除文件并记录到暂存区，提交后历史中保留删除记录 git rm --cached &lt;file&gt; # 仅从暂存区移除文件（工作区文件保留） git rm -r &lt;folder&gt; # 递归删除文件夹及其中所有文件 git rm -f &lt;file&gt; # 强制删除已修改或已暂存的文件 ">
+<title>Hugo Command</title>
+
+<link rel='canonical' href='http://localhost:1313/p/hugo-command/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Hugo Command">
+<meta property='og:description' content="\nGit 常用命令速查（README 带注释版） 1、Git 配置命令 1 2 3 4 5 6 7 8 9 10 11 12 13 git config -l # 查看当前生效的所有 Git 配置（多层级汇总） git config --system --list # 查看系统级配置（针对整台电脑） git config --global --list # 查看用户级配置（当前用户） git config --local --list # 查看当前仓库的本地配置（需在仓库目录中执行） \u200b git config --global user.name &#34;Your Name&#34; # 设置全局用户名 git config --global user.email &#34;you@example.com&#34; # 设置全局邮箱 git config --global init.defaultBranch main # 设置新建仓库默认分支为 main \u200b git config --global core.ignorecase false # 让 Git 区分大小写文件名 git config --global pull.rebase false # pull 默认使用 merge，可改为 true 变为 rebase git config --global merge.ff only # 禁止非快进合并 git config --global fetch.prune true # 拉取时自动清理已删除的远程分支 2、基本命令 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 git init # 在当前目录初始化一个新的 Git 仓库 git clone &lt;url&gt; # 从 url 的远程地址克隆整个仓库到本地 git clone --depth=1 &lt;url&gt; # 从 url 克隆最近一次提交（浅克隆），加快速度 git clone --branch &lt;branch&gt; &lt;url&gt; # 从 url 克隆指定分支 &lt;branch&gt; 的仓库 \u200b git status # 显示工作区、暂存区状态 git diff # 比较工作区与暂存区的差异 git diff --staged # 比较暂存区与最新提交的差异 git show &lt;commit&gt; # 查看指定提交的详细内容 \u200b git add &lt;file&gt; # 将指定文件加入暂存区 git add -A # 将所有修改、删除、创建文件加入暂存区 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） git commit -m &#34;提交信息&#34; # 创建一个新提交 git commit --amend # 修改最近一次提交（信息或包含新改动） \u200b git mv &lt;old&gt; &lt;new&gt; # 重命名文件并记录到版本历史 git rm &lt;file&gt; # 删除文件并记录到版本历史(工作区和暂存区同时删除) git rm --cacged &lt;file&gt; # 删除文件并记录到版本历史(删除暂存区文件，不删工作区) 3、分支与合并 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 git branch # 查看所有本地分支 git branch -vv # 查看分支及其上游分支与最近提交 git branch -d &lt;branch&gt; # 删除已经合并的分支 git branch -D &lt;branch&gt; # 强制删除分支 \u200b git switch &lt;branch&gt; # 切换到已存在的分支 git switch -c &lt;new-branch&gt; # 创建并切换到新分支 &lt;new-branch&gt; git merge &lt;branch&gt; # 将指定分支合并到当前分支 git merge --no-ff &lt;branch&gt; # 禁用快进合并，保留合并提交 \u200b git rebase &lt;base-branch&gt; # 将当前分支变基到指定分支之上 git rebase -i &lt;base&gt; # 交互式变基，可编辑、压缩提交 git rebase --abort # 取消正在进行的变基操作 git rebase --continue # 解决冲突后继续变基 \u200b git cherry-pick &lt;commit&gt; # 将某次提交应用到当前分支 git revert &lt;commit&gt; # 生成一个新的提交来撤销指定提交 4、远程协作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 git remote -v # 查看所有已配置的远程仓库地址 git remote add origin &lt;url&gt; # 添加名为 origin 的远程仓库 git remote remove origin # 删除名为 origin 的远程仓库 git remote set-url origin &lt;new-url&gt; # 修改 origin 的远程地址 \u200b git fetch # 从远程拉取最新引用和对象，不自动合并 git fetch -p # 拉取同时清理已删除的远程分支引用 git pull # 相当于 fetch + merge git pull --rebase # 拉取后用 rebase 合并，保持线性历史 \u200b git push # 推送当前分支到远程 git push -u origin &lt;branch&gt; # 推送当前分支并设置上游 git push origin --delete &lt;branch&gt; # 删除远程分支 git push --tags # 推送本地所有标签到远程 5、日志与追溯 1 2 3 4 5 6 git log # 查看提交历史 git log --oneline --graph --decorate # 简洁图形化查看历史 git log -p # 查看每次提交包含的补丁 git shortlog -sn # 按作者统计提交次数 git blame &lt;file&gt; # 查看文件每行由谁何时修改 git reflog # 查看 HEAD 和分支引用的变动历史 6、回退与恢复 1 2 3 4 5 6 7 git reset --soft &lt;commit&gt; # 回退到指定提交，保留工作区和暂存区 git reset --mixed &lt;commit&gt; # 回退到指定提交，保留工作区，清空暂存区 git reset --hard &lt;commit&gt; # 回退到指定提交，丢弃暂存区和工作区改动 （默认） \u200b git restore &lt;file&gt; # 用暂存区的内容覆盖工作区文件 git restore --source=&lt;commit&gt; &lt;file&gt; # 用指定提交的内容覆盖工作区文件 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） 7、暂存更改（stash） 1 2 3 4 5 6 7 8 git stash push -m &#34;说明&#34; # 暂存当前所有更改到一个命名的 stash git stash push -u -m &#34;说明&#34; # 包括未跟踪文件一起暂存 git stash list # 查看 stash 列表 git stash show -p stash@{0} # 查看指定 stash 的改动详情 git stash pop # 恢复最近一个 stash 并删除它 git stash apply stash@{n} # 恢复指定 stash 但保留它 git stash drop stash@{n} # 删除指定 stash git stash clear # 删除所有 stash（危险操作） 8、标签（tag） 1 2 3 4 5 6 git tag # 查看本地所有标签 git tag v1.0.0 # 创建轻量标签 git tag -a v1.0.0 -m &#34;发布说明&#34; # 创建带说明的注解标签 git show v1.0.0 # 查看标签信息 git push origin v1.0.0 # 推送单个标签到远程 git push origin --tags # 推送所有标签到远程 9、常见工作流 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 git init # 初始化仓库 git add -A # 添加所有改动到暂存区 git commit -m &#34;chore: initial commit&#34; # 首次提交 git branch -M main # 重命名分支为 main git remote add origin &lt;url&gt; # 绑定远程仓库 git push -u origin main # 推送 main 分支并建立跟踪关系 \u200b git switch -c feature/login # 新建功能分支并切换 git add -A # 提交前添加所有修改 git commit -m &#34;feat(login): basic form&#34; # 提交功能代码 git push -u origin feature/login # 推送到远程 \u200b git switch feature/login # 切回功能分支 git fetch origin # 拉取远程更新 git rebase origin/main # 将分支变基到最新 main git push --force-with-lease # 强制推送（安全模式） \u200b git switch main # 切回主分支 git pull # 更新主分支 git tag -a v1.2.0 -m &#34;Release v1.2.0&#34; # 打标签发布 git push origin v1.2.0 # 推送标签到远程 10、冲突解决 1 2 3 4 5 git add &lt;冲突文件&gt; # 解决冲突后标记文件为已解决 git merge --continue # 继续合并 git rebase --continue # 继续变基 git merge --abort # 放弃合并回到合并前状态 git rebase --abort # 放弃变基回到开始前状态 11、找回丢失提交 1 2 3 git reflog # 找到需要回退的提交或 HEAD@{n} git reset --hard &lt;that-commit&gt; # 回到该提交（危险，丢弃未提交改动） git revert &lt;that-commit&gt; # 创建一个新的提交反做该提交 12、搜索与清理 1 2 3 4 5 git grep &#34;keyword&#34; # 搜索关键字 git grep -n &#34;keyword&#34; -- &lt;path&gt; # 搜索指定路径并显示行号 \u200b git clean -fd # 删除未跟踪文件和目录 git clean -fdx # 包含 .gitignore 忽略的文件（危险） git fetch 部分 1 2 3 4 5 git fetch # 从远程仓库拉取最新引用和对象，不自动合并 git fetch -p # 拉取并清理远程已删除的分支引用（prune） git fetch --all # 拉取所有远程的所有分支 git fetch origin main # 仅拉取 origin 的 main 分支 git fetch --tags # 仅获取远程的标签 git rm 部分 1 2 3 4 git rm &lt;file&gt; # 删除文件并记录到暂存区，提交后历史中保留删除记录 git rm --cached &lt;file&gt; # 仅从暂存区移除文件（工作区文件保留） git rm -r &lt;folder&gt; # 递归删除文件夹及其中所有文件 git rm -f &lt;file&gt; # 强制删除已修改或已暂存的文件 ">
+<meta property='og:url' content='http://localhost:1313/p/hugo-command/'>
+<meta property='og:site_name' content='LZ6years'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-08T20:59:54&#43;08:00'/><meta property='article:modified_time' content='2025-09-08T20:59:54&#43;08:00'/>
+<meta name="twitter:title" content="Hugo Command">
+<meta name="twitter:description" content="\nGit 常用命令速查（README 带注释版） 1、Git 配置命令 1 2 3 4 5 6 7 8 9 10 11 12 13 git config -l # 查看当前生效的所有 Git 配置（多层级汇总） git config --system --list # 查看系统级配置（针对整台电脑） git config --global --list # 查看用户级配置（当前用户） git config --local --list # 查看当前仓库的本地配置（需在仓库目录中执行） \u200b git config --global user.name &#34;Your Name&#34; # 设置全局用户名 git config --global user.email &#34;you@example.com&#34; # 设置全局邮箱 git config --global init.defaultBranch main # 设置新建仓库默认分支为 main \u200b git config --global core.ignorecase false # 让 Git 区分大小写文件名 git config --global pull.rebase false # pull 默认使用 merge，可改为 true 变为 rebase git config --global merge.ff only # 禁止非快进合并 git config --global fetch.prune true # 拉取时自动清理已删除的远程分支 2、基本命令 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 git init # 在当前目录初始化一个新的 Git 仓库 git clone &lt;url&gt; # 从 url 的远程地址克隆整个仓库到本地 git clone --depth=1 &lt;url&gt; # 从 url 克隆最近一次提交（浅克隆），加快速度 git clone --branch &lt;branch&gt; &lt;url&gt; # 从 url 克隆指定分支 &lt;branch&gt; 的仓库 \u200b git status # 显示工作区、暂存区状态 git diff # 比较工作区与暂存区的差异 git diff --staged # 比较暂存区与最新提交的差异 git show &lt;commit&gt; # 查看指定提交的详细内容 \u200b git add &lt;file&gt; # 将指定文件加入暂存区 git add -A # 将所有修改、删除、创建文件加入暂存区 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） git commit -m &#34;提交信息&#34; # 创建一个新提交 git commit --amend # 修改最近一次提交（信息或包含新改动） \u200b git mv &lt;old&gt; &lt;new&gt; # 重命名文件并记录到版本历史 git rm &lt;file&gt; # 删除文件并记录到版本历史(工作区和暂存区同时删除) git rm --cacged &lt;file&gt; # 删除文件并记录到版本历史(删除暂存区文件，不删工作区) 3、分支与合并 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 git branch # 查看所有本地分支 git branch -vv # 查看分支及其上游分支与最近提交 git branch -d &lt;branch&gt; # 删除已经合并的分支 git branch -D &lt;branch&gt; # 强制删除分支 \u200b git switch &lt;branch&gt; # 切换到已存在的分支 git switch -c &lt;new-branch&gt; # 创建并切换到新分支 &lt;new-branch&gt; git merge &lt;branch&gt; # 将指定分支合并到当前分支 git merge --no-ff &lt;branch&gt; # 禁用快进合并，保留合并提交 \u200b git rebase &lt;base-branch&gt; # 将当前分支变基到指定分支之上 git rebase -i &lt;base&gt; # 交互式变基，可编辑、压缩提交 git rebase --abort # 取消正在进行的变基操作 git rebase --continue # 解决冲突后继续变基 \u200b git cherry-pick &lt;commit&gt; # 将某次提交应用到当前分支 git revert &lt;commit&gt; # 生成一个新的提交来撤销指定提交 4、远程协作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 git remote -v # 查看所有已配置的远程仓库地址 git remote add origin &lt;url&gt; # 添加名为 origin 的远程仓库 git remote remove origin # 删除名为 origin 的远程仓库 git remote set-url origin &lt;new-url&gt; # 修改 origin 的远程地址 \u200b git fetch # 从远程拉取最新引用和对象，不自动合并 git fetch -p # 拉取同时清理已删除的远程分支引用 git pull # 相当于 fetch + merge git pull --rebase # 拉取后用 rebase 合并，保持线性历史 \u200b git push # 推送当前分支到远程 git push -u origin &lt;branch&gt; # 推送当前分支并设置上游 git push origin --delete &lt;branch&gt; # 删除远程分支 git push --tags # 推送本地所有标签到远程 5、日志与追溯 1 2 3 4 5 6 git log # 查看提交历史 git log --oneline --graph --decorate # 简洁图形化查看历史 git log -p # 查看每次提交包含的补丁 git shortlog -sn # 按作者统计提交次数 git blame &lt;file&gt; # 查看文件每行由谁何时修改 git reflog # 查看 HEAD 和分支引用的变动历史 6、回退与恢复 1 2 3 4 5 6 7 git reset --soft &lt;commit&gt; # 回退到指定提交，保留工作区和暂存区 git reset --mixed &lt;commit&gt; # 回退到指定提交，保留工作区，清空暂存区 git reset --hard &lt;commit&gt; # 回退到指定提交，丢弃暂存区和工作区改动 （默认） \u200b git restore &lt;file&gt; # 用暂存区的内容覆盖工作区文件 git restore --source=&lt;commit&gt; &lt;file&gt; # 用指定提交的内容覆盖工作区文件 git restore --staged &lt;file&gt; # 从暂存区移除文件（取消暂存） 7、暂存更改（stash） 1 2 3 4 5 6 7 8 git stash push -m &#34;说明&#34; # 暂存当前所有更改到一个命名的 stash git stash push -u -m &#34;说明&#34; # 包括未跟踪文件一起暂存 git stash list # 查看 stash 列表 git stash show -p stash@{0} # 查看指定 stash 的改动详情 git stash pop # 恢复最近一个 stash 并删除它 git stash apply stash@{n} # 恢复指定 stash 但保留它 git stash drop stash@{n} # 删除指定 stash git stash clear # 删除所有 stash（危险操作） 8、标签（tag） 1 2 3 4 5 6 git tag # 查看本地所有标签 git tag v1.0.0 # 创建轻量标签 git tag -a v1.0.0 -m &#34;发布说明&#34; # 创建带说明的注解标签 git show v1.0.0 # 查看标签信息 git push origin v1.0.0 # 推送单个标签到远程 git push origin --tags # 推送所有标签到远程 9、常见工作流 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 git init # 初始化仓库 git add -A # 添加所有改动到暂存区 git commit -m &#34;chore: initial commit&#34; # 首次提交 git branch -M main # 重命名分支为 main git remote add origin &lt;url&gt; # 绑定远程仓库 git push -u origin main # 推送 main 分支并建立跟踪关系 \u200b git switch -c feature/login # 新建功能分支并切换 git add -A # 提交前添加所有修改 git commit -m &#34;feat(login): basic form&#34; # 提交功能代码 git push -u origin feature/login # 推送到远程 \u200b git switch feature/login # 切回功能分支 git fetch origin # 拉取远程更新 git rebase origin/main # 将分支变基到最新 main git push --force-with-lease # 强制推送（安全模式） \u200b git switch main # 切回主分支 git pull # 更新主分支 git tag -a v1.2.0 -m &#34;Release v1.2.0&#34; # 打标签发布 git push origin v1.2.0 # 推送标签到远程 10、冲突解决 1 2 3 4 5 git add &lt;冲突文件&gt; # 解决冲突后标记文件为已解决 git merge --continue # 继续合并 git rebase --continue # 继续变基 git merge --abort # 放弃合并回到合并前状态 git rebase --abort # 放弃变基回到开始前状态 11、找回丢失提交 1 2 3 git reflog # 找到需要回退的提交或 HEAD@{n} git reset --hard &lt;that-commit&gt; # 回到该提交（危险，丢弃未提交改动） git revert &lt;that-commit&gt; # 创建一个新的提交反做该提交 12、搜索与清理 1 2 3 4 5 git grep &#34;keyword&#34; # 搜索关键字 git grep -n &#34;keyword&#34; -- &lt;path&gt; # 搜索指定路径并显示行号 \u200b git clean -fd # 删除未跟踪文件和目录 git clean -fdx # 包含 .gitignore 忽略的文件（危险） git fetch 部分 1 2 3 4 5 git fetch # 从远程仓库拉取最新引用和对象，不自动合并 git fetch -p # 拉取并清理远程已删除的分支引用（prune） git fetch --all # 拉取所有远程的所有分支 git fetch origin main # 仅拉取 origin 的 main 分支 git fetch --tags # 仅获取远程的标签 git rm 部分 1 2 3 4 git rm &lt;file&gt; # 删除文件并记录到暂存区，提交后历史中保留删除记录 git rm --cached &lt;file&gt; # 仅从暂存区移除文件（工作区文件保留） git rm -r &lt;folder&gt; # 递归删除文件夹及其中所有文件 git rm -f &lt;file&gt; # 强制删除已修改或已暂存的文件 ">
+    <link rel="shortcut icon" href="/obito.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/obito_hu_54e5b81d5df601ab.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😈</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">LZ6years</a></h1>
+            <h2 class="site-description">学习CS、AI的小白</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/LZ6years'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://scholar.google.com/citations?user=eBq3xRcAAAAJ&amp;hl=zh-CN&amp;authuser=1'
+                        target="_blank"
+                        title="Google Scholar"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><g fill="#1d1d1b"><path d="m118.01 47.92c-1.48-1.48-47.6-39.8-49.68-41.38-2.07-1.58-3.06-2.86-4.05-2.47-.99.4-8.69 6.32-19.65 15.31s-35.26 28.74-36.05 29.43-.69 5.83-.49 6.62.3 1.09 5.14 4.94 19.46 16.2 19.46 16.2-4.25 23.31 11.85 38.91 40.79 7.7 50.37-7.01c9.58-14.72 4.64-34.96 4.64-34.96s19.46-17.38 20.25-19.06-.3-5.04-1.78-6.52zm-105.48 4.64c-.79-.69-.79-1.88-.3-2.47s41.09-33.78 44.34-36.34c3.26-2.57 7.21-5.43 7.21-5.43l.89 42.76s-20.15-1.38-29.63 19.85c0 0-21.73-17.68-22.52-18.37zm53.14 1.58c19.16.99 25.48 16.1 25.48 16.1l-53.73 1.19s6.94-18.38 28.25-17.28zm24.98 48.2c-8.99 11.95-24.59 16.89-38.12 9.98s-20.64-21.04-16.39-38.12l56.69-1.09s6.81 17.28-2.17 29.23zm3.95-32.99s-7.31-15.41-26.86-18.37l-.79-42.17 49.97 42.37z"/><path d="m30.11 39.82c0-.81 13.23-11.16 13.93-11.06s1.19 1.58 1.09 2.17-12.44 10.77-13.14 10.86-1.88-.99-1.88-1.98z"/><path d="m55.64 106.69c-.61-.78 1.26-2.07 1.78-2s4.67 4 4.74 4.67-.67 1.19-1.11 1.26-4.59-2.89-5.41-3.93z"/><path d="m61.12 103.35c-.61-.78 1.26-2.07 1.78-2s9.11 8.07 9.18 8.74-.67 1.19-1.11 1.26-9.04-6.96-9.85-8z"/><path d="m68.31 99.65c-.61-.78 1.26-2.07 1.78-2s8.3 7.18 8.37 7.85-.67 1.19-1.11 1.26-8.22-6.07-9.04-7.11z"/><path d="m75.86 95.21c-.61-.78 1.26-2.07 1.78-2s8.96 6.59 9.04 7.26-.67 1.19-1.11 1.26-8.89-5.48-9.7-6.52z"/><path d="m80.9 91.28c-.61-.78 1.26-2.07 1.78-2s6.3 4.74 6.37 5.41-.67 1.19-1.11 1.26-6.22-3.63-7.04-4.67z"/><path d="m86.38 86.98c-.61-.78 1.26-2.07 1.78-2s3.56 2.74 3.63 3.41-.67 1.19-1.11 1.26-3.48-1.63-4.3-2.67z"/><path d="m89.12 55.28c-.61-.78 1.26-2.07 1.78-2s7.78 5.7 7.85 6.37-.67 1.19-1.11 1.26-7.7-4.59-8.52-5.63z"/><path d="m94.23 52.1c-.61-.78 1.26-2.07 1.78-2s8.22 6.15 8.3 6.81-.67 1.19-1.11 1.26-8.15-5.04-8.96-6.07z"/><path d="m98.75 48.32c-.61-.78 1.26-2.07 1.78-2s7.56 5.93 7.63 6.59-.67 1.19-1.11 1.26-7.48-4.81-8.3-5.85z"/><path d="m105.79 47.65c-.61-.78 1.26-2.07 1.78-2s2.89 2.37 2.96 3.04-.67 1.19-1.11 1.26-2.81-1.26-3.63-2.3z"/><path d="m89.27 83.06c-.61-.78 1.26-2.07 1.78-2s1.93 1.78 2 2.44-.67 1.19-1.11 1.26-1.85-.67-2.67-1.7z"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:zequan@hhu.edu.cn'
+                        target="_blank"
+                        title="zequan@hhu.edu.cn"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1git-配置命令">1、Git 配置命令</a></li>
+    <li><a href="#2基本命令">2、基本命令</a></li>
+    <li><a href="#3分支与合并">3、分支与合并</a></li>
+    <li><a href="#4远程协作">4、远程协作</a></li>
+    <li><a href="#5日志与追溯">5、日志与追溯</a></li>
+    <li><a href="#6回退与恢复">6、回退与恢复</a></li>
+    <li><a href="#7暂存更改stash">7、暂存更改（stash）</a></li>
+    <li><a href="#8标签tag">8、标签（tag）</a></li>
+    <li><a href="#9常见工作流">9、常见工作流</a></li>
+    <li><a href="#10冲突解决">10、冲突解决</a></li>
+    <li><a href="#11找回丢失提交">11、找回丢失提交</a></li>
+    <li><a href="#12搜索与清理">12、搜索与清理</a></li>
+    <li><a href="#git-fetch-部分"><code>git fetch</code> 部分</a></li>
+    <li><a href="#git-rm-部分"><code>git rm</code> 部分</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/hugo-command/">Hugo Command</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-08</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><img src="/assets/git-20250907151108322.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h1 id="git-常用命令速查readme-带注释版">Git 常用命令速查（README 带注释版）
+</h1><h2 id="1git-配置命令">1、Git 配置命令
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config -l                           <span class="c1"># 查看当前生效的所有 Git 配置（多层级汇总）  </span>
+</span></span><span class="line"><span class="cl">git config --system --list              <span class="c1"># 查看系统级配置（针对整台电脑）  </span>
+</span></span><span class="line"><span class="cl">git config --global --list              <span class="c1"># 查看用户级配置（当前用户）  </span>
+</span></span><span class="line"><span class="cl">git config --local  --list              <span class="c1"># 查看当前仓库的本地配置（需在仓库目录中执行）  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git config --global user.name <span class="s2">&#34;Your Name&#34;</span>     <span class="c1"># 设置全局用户名  </span>
+</span></span><span class="line"><span class="cl">git config --global user.email <span class="s2">&#34;you@example.com&#34;</span> <span class="c1"># 设置全局邮箱  </span>
+</span></span><span class="line"><span class="cl">git config --global init.defaultBranch main   <span class="c1"># 设置新建仓库默认分支为 main  </span>
+</span></span><span class="line"><span class="cl">​
+</span></span><span class="line"><span class="cl">git config --global core.ignorecase <span class="nb">false</span>     <span class="c1"># 让 Git 区分大小写文件名  </span>
+</span></span><span class="line"><span class="cl">git config --global pull.rebase <span class="nb">false</span>         <span class="c1"># pull 默认使用 merge，可改为 true 变为 rebase  </span>
+</span></span><span class="line"><span class="cl">git config --global merge.ff only             <span class="c1"># 禁止非快进合并  </span>
+</span></span><span class="line"><span class="cl">git config --global fetch.prune <span class="nb">true</span>          <span class="c1"># 拉取时自动清理已删除的远程分支  </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2基本命令">2、基本命令
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init                                <span class="c1"># 在当前目录初始化一个新的 Git 仓库  </span>
+</span></span><span class="line"><span class="cl">git clone &lt;url&gt;                         <span class="c1"># 从 url 的远程地址克隆整个仓库到本地  </span>
+</span></span><span class="line"><span class="cl">git clone --depth<span class="o">=</span><span class="m">1</span> &lt;url&gt;               <span class="c1"># 从 url 克隆最近一次提交（浅克隆），加快速度  </span>
+</span></span><span class="line"><span class="cl">git clone --branch &lt;branch&gt; &lt;url&gt;       <span class="c1"># 从 url 克隆指定分支 &lt;branch&gt; 的仓库  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git status                                   <span class="c1"># 显示工作区、暂存区状态  </span>
+</span></span><span class="line"><span class="cl">git diff                                     <span class="c1"># 比较工作区与暂存区的差异  </span>
+</span></span><span class="line"><span class="cl">git diff --staged                            <span class="c1"># 比较暂存区与最新提交的差异  </span>
+</span></span><span class="line"><span class="cl">git show &lt;commit&gt;                            <span class="c1"># 查看指定提交的详细内容  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git add &lt;file&gt;                               <span class="c1"># 将指定文件加入暂存区  </span>
+</span></span><span class="line"><span class="cl">git add -A                                   <span class="c1"># 将所有修改、删除、创建文件加入暂存区  </span>
+</span></span><span class="line"><span class="cl">git restore --staged &lt;file&gt;                  <span class="c1"># 从暂存区移除文件（取消暂存）  </span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;提交信息&#34;</span>                     <span class="c1"># 创建一个新提交  </span>
+</span></span><span class="line"><span class="cl">git commit --amend                           <span class="c1"># 修改最近一次提交（信息或包含新改动）  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git mv &lt;old&gt; &lt;new&gt;          <span class="c1"># 重命名文件并记录到版本历史  </span>
+</span></span><span class="line"><span class="cl">git rm &lt;file&gt;               <span class="c1"># 删除文件并记录到版本历史(工作区和暂存区同时删除)</span>
+</span></span><span class="line"><span class="cl">git rm --cacged &lt;file&gt;      <span class="c1"># 删除文件并记录到版本历史(删除暂存区文件，不删工作区)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3分支与合并">3、分支与合并
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch                                   <span class="c1"># 查看所有本地分支  </span>
+</span></span><span class="line"><span class="cl">git branch -vv                               <span class="c1"># 查看分支及其上游分支与最近提交  </span>
+</span></span><span class="line"><span class="cl">git branch -d &lt;branch&gt;                       <span class="c1"># 删除已经合并的分支  </span>
+</span></span><span class="line"><span class="cl">git branch -D &lt;branch&gt;                       <span class="c1"># 强制删除分支  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git switch &lt;branch&gt;                          <span class="c1"># 切换到已存在的分支  </span>
+</span></span><span class="line"><span class="cl">git switch -c &lt;new-branch&gt;                   <span class="c1"># 创建并切换到新分支 &lt;new-branch&gt;  </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git merge &lt;branch&gt;                           <span class="c1"># 将指定分支合并到当前分支  </span>
+</span></span><span class="line"><span class="cl">git merge --no-ff &lt;branch&gt;                   <span class="c1"># 禁用快进合并，保留合并提交  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git rebase &lt;base-branch&gt;                     <span class="c1"># 将当前分支变基到指定分支之上  </span>
+</span></span><span class="line"><span class="cl">git rebase -i &lt;base&gt;                         <span class="c1"># 交互式变基，可编辑、压缩提交  </span>
+</span></span><span class="line"><span class="cl">git rebase --abort                           <span class="c1"># 取消正在进行的变基操作  </span>
+</span></span><span class="line"><span class="cl">git rebase --continue                        <span class="c1"># 解决冲突后继续变基  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git cherry-pick &lt;commit&gt;                     <span class="c1"># 将某次提交应用到当前分支  </span>
+</span></span><span class="line"><span class="cl">git revert &lt;commit&gt;                          <span class="c1"># 生成一个新的提交来撤销指定提交</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4远程协作">4、远程协作
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git remote -v                                <span class="c1"># 查看所有已配置的远程仓库地址  </span>
+</span></span><span class="line"><span class="cl">git remote add origin &lt;url&gt;                  <span class="c1"># 添加名为 origin 的远程仓库  </span>
+</span></span><span class="line"><span class="cl">git remote remove origin                     <span class="c1"># 删除名为 origin 的远程仓库  </span>
+</span></span><span class="line"><span class="cl">git remote set-url origin &lt;new-url&gt;          <span class="c1"># 修改 origin 的远程地址  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git fetch                               <span class="c1"># 从远程拉取最新引用和对象，不自动合并  </span>
+</span></span><span class="line"><span class="cl">git fetch -p                            <span class="c1"># 拉取同时清理已删除的远程分支引用  </span>
+</span></span><span class="line"><span class="cl">git pull                                <span class="c1"># 相当于 fetch + merge  </span>
+</span></span><span class="line"><span class="cl">git pull --rebase                       <span class="c1"># 拉取后用 rebase 合并，保持线性历史  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git push                                     <span class="c1"># 推送当前分支到远程  </span>
+</span></span><span class="line"><span class="cl">git push -u origin &lt;branch&gt;                  <span class="c1"># 推送当前分支并设置上游  </span>
+</span></span><span class="line"><span class="cl">git push origin --delete &lt;branch&gt;            <span class="c1"># 删除远程分支  </span>
+</span></span><span class="line"><span class="cl">git push --tags                              <span class="c1"># 推送本地所有标签到远程</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5日志与追溯">5、日志与追溯
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log                                      <span class="c1"># 查看提交历史  </span>
+</span></span><span class="line"><span class="cl">git log --oneline --graph --decorate         <span class="c1"># 简洁图形化查看历史  </span>
+</span></span><span class="line"><span class="cl">git log -p                                   <span class="c1"># 查看每次提交包含的补丁  </span>
+</span></span><span class="line"><span class="cl">git shortlog -sn                             <span class="c1"># 按作者统计提交次数  </span>
+</span></span><span class="line"><span class="cl">git blame &lt;file&gt;                             <span class="c1"># 查看文件每行由谁何时修改  </span>
+</span></span><span class="line"><span class="cl">git reflog                                   <span class="c1"># 查看 HEAD 和分支引用的变动历史</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6回退与恢复">6、回退与恢复
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reset --soft &lt;commit&gt;      <span class="c1"># 回退到指定提交，保留工作区和暂存区  </span>
+</span></span><span class="line"><span class="cl">git reset --mixed &lt;commit&gt;     <span class="c1"># 回退到指定提交，保留工作区，清空暂存区  </span>
+</span></span><span class="line"><span class="cl">git reset --hard &lt;commit&gt;      <span class="c1"># 回退到指定提交，丢弃暂存区和工作区改动 （默认） </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git restore &lt;file&gt;                           <span class="c1"># 用暂存区的内容覆盖工作区文件  </span>
+</span></span><span class="line"><span class="cl">git restore --source<span class="o">=</span>&lt;commit&gt; &lt;file&gt;         <span class="c1"># 用指定提交的内容覆盖工作区文件  </span>
+</span></span><span class="line"><span class="cl">git restore --staged &lt;file&gt;                  <span class="c1"># 从暂存区移除文件（取消暂存）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7暂存更改stash">7、暂存更改（stash）
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git stash push -m <span class="s2">&#34;说明&#34;</span>                     <span class="c1"># 暂存当前所有更改到一个命名的 stash  </span>
+</span></span><span class="line"><span class="cl">git stash push -u -m <span class="s2">&#34;说明&#34;</span>                  <span class="c1"># 包括未跟踪文件一起暂存  </span>
+</span></span><span class="line"><span class="cl">git stash list                               <span class="c1"># 查看 stash 列表  </span>
+</span></span><span class="line"><span class="cl">git stash show -p stash@<span class="o">{</span>0<span class="o">}</span>                  <span class="c1"># 查看指定 stash 的改动详情  </span>
+</span></span><span class="line"><span class="cl">git stash pop                                <span class="c1"># 恢复最近一个 stash 并删除它  </span>
+</span></span><span class="line"><span class="cl">git stash apply stash@<span class="o">{</span>n<span class="o">}</span>                    <span class="c1"># 恢复指定 stash 但保留它  </span>
+</span></span><span class="line"><span class="cl">git stash drop stash@<span class="o">{</span>n<span class="o">}</span>                     <span class="c1"># 删除指定 stash  </span>
+</span></span><span class="line"><span class="cl">git stash clear                              <span class="c1"># 删除所有 stash（危险操作）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8标签tag">8、标签（tag）
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag                                      <span class="c1"># 查看本地所有标签  </span>
+</span></span><span class="line"><span class="cl">git tag v1.0.0                               <span class="c1"># 创建轻量标签  </span>
+</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;发布说明&#34;</span>               <span class="c1"># 创建带说明的注解标签  </span>
+</span></span><span class="line"><span class="cl">git show v1.0.0                              <span class="c1"># 查看标签信息  </span>
+</span></span><span class="line"><span class="cl">git push origin v1.0.0                       <span class="c1"># 推送单个标签到远程  </span>
+</span></span><span class="line"><span class="cl">git push origin --tags                       <span class="c1"># 推送所有标签到远程</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="9常见工作流">9、常见工作流
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init                                     <span class="c1"># 初始化仓库  </span>
+</span></span><span class="line"><span class="cl">git add -A                                   <span class="c1"># 添加所有改动到暂存区  </span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;chore: initial commit&#34;</span>        <span class="c1"># 首次提交  </span>
+</span></span><span class="line"><span class="cl">git branch -M main                           <span class="c1"># 重命名分支为 main  </span>
+</span></span><span class="line"><span class="cl">git remote add origin &lt;url&gt;                  <span class="c1"># 绑定远程仓库  </span>
+</span></span><span class="line"><span class="cl">git push -u origin main                      <span class="c1"># 推送 main 分支并建立跟踪关系  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git switch -c feature/login                  <span class="c1"># 新建功能分支并切换  </span>
+</span></span><span class="line"><span class="cl">git add -A                                   <span class="c1"># 提交前添加所有修改  </span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;feat(login): basic form&#34;</span>      <span class="c1"># 提交功能代码  </span>
+</span></span><span class="line"><span class="cl">git push -u origin feature/login             <span class="c1"># 推送到远程  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git switch feature/login                     <span class="c1"># 切回功能分支  </span>
+</span></span><span class="line"><span class="cl">git fetch origin                             <span class="c1"># 拉取远程更新  </span>
+</span></span><span class="line"><span class="cl">git rebase origin/main                       <span class="c1"># 将分支变基到最新 main  </span>
+</span></span><span class="line"><span class="cl">git push --force-with-lease                  <span class="c1"># 强制推送（安全模式）  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git switch main                              <span class="c1"># 切回主分支  </span>
+</span></span><span class="line"><span class="cl">git pull                                     <span class="c1"># 更新主分支  </span>
+</span></span><span class="line"><span class="cl">git tag -a v1.2.0 -m <span class="s2">&#34;Release v1.2.0&#34;</span>        <span class="c1"># 打标签发布  </span>
+</span></span><span class="line"><span class="cl">git push origin v1.2.0                       <span class="c1"># 推送标签到远程</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="10冲突解决">10、冲突解决
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;冲突文件&gt;                           <span class="c1"># 解决冲突后标记文件为已解决  </span>
+</span></span><span class="line"><span class="cl">git merge --continue                         <span class="c1"># 继续合并  </span>
+</span></span><span class="line"><span class="cl">git rebase --continue                        <span class="c1"># 继续变基  </span>
+</span></span><span class="line"><span class="cl">git merge --abort                            <span class="c1"># 放弃合并回到合并前状态  </span>
+</span></span><span class="line"><span class="cl">git rebase --abort                           <span class="c1"># 放弃变基回到开始前状态</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="11找回丢失提交">11、找回丢失提交
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reflog                                   <span class="c1"># 找到需要回退的提交或 HEAD@{n}  </span>
+</span></span><span class="line"><span class="cl">git reset --hard &lt;that-commit&gt;               <span class="c1"># 回到该提交（危险，丢弃未提交改动）  </span>
+</span></span><span class="line"><span class="cl">git revert &lt;that-commit&gt;                     <span class="c1"># 创建一个新的提交反做该提交</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12搜索与清理">12、搜索与清理
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git grep <span class="s2">&#34;keyword&#34;</span>                           <span class="c1"># 搜索关键字  </span>
+</span></span><span class="line"><span class="cl">git grep -n <span class="s2">&#34;keyword&#34;</span> -- &lt;path&gt;              <span class="c1"># 搜索指定路径并显示行号  </span>
+</span></span><span class="line"><span class="cl">​  
+</span></span><span class="line"><span class="cl">git clean -fd                                <span class="c1"># 删除未跟踪文件和目录  </span>
+</span></span><span class="line"><span class="cl">git clean -fdx                               <span class="c1"># 包含 .gitignore 忽略的文件（危险）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-fetch-部分"><code>git fetch</code> 部分
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git fetch                       <span class="c1"># 从远程仓库拉取最新引用和对象，不自动合并 </span>
+</span></span><span class="line"><span class="cl">git fetch -p                    <span class="c1"># 拉取并清理远程已删除的分支引用（prune） </span>
+</span></span><span class="line"><span class="cl">git fetch --all                 <span class="c1"># 拉取所有远程的所有分支 </span>
+</span></span><span class="line"><span class="cl">git fetch origin main           <span class="c1"># 仅拉取 origin 的 main 分支 </span>
+</span></span><span class="line"><span class="cl">git fetch --tags                <span class="c1"># 仅获取远程的标签</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-rm-部分"><code>git rm</code> 部分
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm &lt;file&gt;                <span class="c1"># 删除文件并记录到暂存区，提交后历史中保留删除记录 </span>
+</span></span><span class="line"><span class="cl">git rm --cached &lt;file&gt;       <span class="c1"># 仅从暂存区移除文件（工作区文件保留） </span>
+</span></span><span class="line"><span class="cl">git rm -r &lt;folder&gt;           <span class="c1"># 递归删除文件夹及其中所有文件 </span>
+</span></span><span class="line"><span class="cl">git rm -f &lt;file&gt;             <span class="c1"># 强制删除已修改或已暂存的文件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 LZ6years
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.5978fa48f87e7542994f27c14ea944893b190eedb04f764bb9e48020d984eb5e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

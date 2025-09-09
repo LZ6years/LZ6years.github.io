@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>工具 on LZ6years</title>
+        <link>http://localhost:1313/tags/%E5%B7%A5%E5%85%B7/</link>
+        <description>Recent content in 工具 on LZ6years</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>LZ6years</copyright>
+        <lastBuildDate>Mon, 08 Sep 2025 10:00:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo 常用命令速查表</title>
+        <link>http://localhost:1313/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</link>
+        <pubDate>Mon, 08 Sep 2025 10:00:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</guid>
+        <description>&lt;h1 id=&#34;hugo-常用命令速查表&#34;&gt;Hugo 常用命令速查表
+&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;命令                作用                           常见参数                                                   典型用法&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;hugo server&lt;/code&gt;       本地启动预览服务器（热更新）   &lt;code&gt;-D&lt;/code&gt; 显示草稿、&lt;code&gt;-F&lt;/code&gt; 显示未来文章、&lt;code&gt;--bind&lt;/code&gt;/&lt;code&gt;--baseURL&lt;/code&gt;     &lt;code&gt;hugo server -D&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo build&lt;/code&gt;        生产构建，生成静态站点         &lt;code&gt;--minify&lt;/code&gt; 压缩、&lt;code&gt;--gc&lt;/code&gt; 清理、&lt;code&gt;-d&lt;/code&gt; 指定输出目录            &lt;code&gt;hugo --gc --minify -d public&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo new&lt;/code&gt;          新建内容/站点/主题             &lt;code&gt;hugo new posts/x.md&lt;/code&gt;、&lt;code&gt;hugo new site&lt;/code&gt;、&lt;code&gt;hugo new theme&lt;/code&gt;   &lt;code&gt;hugo new posts/my-first-post.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo list&lt;/code&gt;         列出内容（草稿、未来、过期）   &lt;code&gt;drafts&lt;/code&gt; / &lt;code&gt;future&lt;/code&gt; / &lt;code&gt;expired&lt;/code&gt;                            &lt;code&gt;hugo list drafts&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo config&lt;/code&gt;       查看合并后的配置               （一般无参，或结合子命令）                                 &lt;code&gt;hugo config&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo env&lt;/code&gt;          查看环境与版本信息             &amp;ndash;                                                         &lt;code&gt;hugo env&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo version&lt;/code&gt;      显示 Hugo 版本                 &amp;ndash;                                                         &lt;code&gt;hugo version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo convert&lt;/code&gt;      转换 Front Matter 格式         &lt;code&gt;--unsafe&lt;/code&gt;（允许 HTML）等                                  &lt;code&gt;hugo convert toYAML&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo import&lt;/code&gt;       从其他系统导入                 &lt;code&gt;jekyll&lt;/code&gt;（常见）                                           &lt;code&gt;hugo import jekyll old/ new/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo gen&lt;/code&gt;          生成文档/语法高亮样式等        &lt;code&gt;chromastyles&lt;/code&gt;、&lt;code&gt;man&lt;/code&gt;                                      &lt;code&gt;hugo gen chromastyles --style=monokai&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo mod&lt;/code&gt;          管理模块（主题/依赖）          &lt;code&gt;init&lt;/code&gt;/&lt;code&gt;get&lt;/code&gt;/&lt;code&gt;tidy&lt;/code&gt;/&lt;code&gt;vendor&lt;/code&gt;/&lt;code&gt;graph&lt;/code&gt;                       &lt;code&gt;hugo mod init example.com/site&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo deploy&lt;/code&gt;       部署到云端（按配置）           &lt;code&gt;--target&lt;/code&gt;、&lt;code&gt;--dryRun&lt;/code&gt;                                     &lt;code&gt;hugo deploy --target=prod --dryRun&lt;/code&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
