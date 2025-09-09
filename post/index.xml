@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on LZ6years</title>
-        <link>http://localhost:1313/post/</link>
+        <link>https://LZ6years.github.io/post/</link>
         <description>Recent content in Posts on LZ6years</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LZ6years</copyright>
-        <lastBuildDate>Mon, 08 Sep 2025 20:59:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 08 Sep 2025 20:59:54 +0800</lastBuildDate><atom:link href="https://LZ6years.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Git命令</title>
-        <link>http://localhost:1313/p/git%E5%91%BD%E4%BB%A4/</link>
+        <link>https://LZ6years.github.io/p/git%E5%91%BD%E4%BB%A4/</link>
         <pubDate>Mon, 08 Sep 2025 20:59:54 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/git%E5%91%BD%E4%BB%A4/</guid>
-        <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/assets/git-20250907151108322.jpg&#34;
+        <guid>https://LZ6years.github.io/p/git%E5%91%BD%E4%BB%A4/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://LZ6years.github.io/assets/git-20250907151108322.jpg&#34;
 	
 	
 	
@@ -391,11 +391,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>Git命令</title>
-        <link>http://localhost:1313/p/git%E5%91%BD%E4%BB%A4/</link>
+        <title>Tmux 命令(自定义)</title>
+        <link>https://LZ6years.github.io/p/tmux-%E5%91%BD%E4%BB%A4%E8%87%AA%E5%AE%9A%E4%B9%89/</link>
         <pubDate>Mon, 08 Sep 2025 20:59:54 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/git%E5%91%BD%E4%BB%A4/</guid>
+        <guid>https://LZ6years.github.io/p/tmux-%E5%91%BD%E4%BB%A4%E8%87%AA%E5%AE%9A%E4%B9%89/</guid>
         <description>&lt;h2 id=&#34;前缀键&#34;&gt;前缀键
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;前缀键&lt;/strong&gt;: &lt;code&gt;Ctrl+s&lt;/code&gt; （替代默认的 &lt;code&gt;Ctrl+b&lt;/code&gt;）&lt;/li&gt;
@@ -465,10 +465,10 @@
         </item>
         <item>
         <title>Hugo 常用命令速查表</title>
-        <link>http://localhost:1313/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</link>
+        <link>https://LZ6years.github.io/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</link>
         <pubDate>Mon, 08 Sep 2025 10:00:00 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</guid>
+        <guid>https://LZ6years.github.io/p/hugo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</guid>
         <description>&lt;h1 id=&#34;hugo-常用命令速查表&#34;&gt;Hugo 常用命令速查表
 &lt;/h1&gt;&lt;hr&gt;
 &lt;p&gt;命令                作用                           常见参数                                                   典型用法&lt;/p&gt;
@@ -489,11 +489,11 @@
         </item>
         <item>
         <title>Markdown Syntax Guide</title>
-        <link>http://localhost:1313/p/markdown-syntax-guide/</link>
+        <link>https://LZ6years.github.io/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="http://localhost:1313/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
+        <guid>https://LZ6years.github.io/p/markdown-syntax-guide/</guid>
+        <description>&lt;img src="https://LZ6years.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings
 &lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
 &lt;h1 id=&#34;h1&#34;&gt;H1

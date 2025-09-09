@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on LZ6years</title>
-        <link>http://localhost:1313/page/</link>
+        <link>https://LZ6years.github.io/page/</link>
         <description>Recent content in Pages on LZ6years</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LZ6years</copyright>
-        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://LZ6years.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>归档</title>
-        <link>http://localhost:1313/archives/</link>
+        <link>https://LZ6years.github.io/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/archives/</guid>
+        <guid>https://LZ6years.github.io/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>关于</title>
-        <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
+        <link>https://LZ6years.github.io/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>https://LZ6years.github.io/%E5%85%B3%E4%BA%8E/</guid>
         <description>&lt;h2 id=&#34;-about-me&#34;&gt;🧑 About Me
 &lt;/h2&gt;&lt;p&gt;我是 &lt;strong&gt;王泽权&lt;/strong&gt;，目前就读于 &lt;strong&gt;河海大学 信息管理与信息系统专业 本科（2022.09 – 至今）&lt;/strong&gt;。
 我现在在 &lt;strong&gt;刘凡教授&lt;/strong&gt; 指导下，加入 &lt;strong&gt;多模态人工智能实验室（AIM Group）&lt;/strong&gt; 从事科研工作，主要研究兴趣包括：多模态处理、机器学习。&lt;/p&gt;
@@ -67,18 +67,18 @@ Liang Yao, Fan Liu, Shengxiang Xu, Chuanyi Zhang, Xing Ma, Jianyu Jiang, &lt;str
         </item>
         <item>
         <title>链接</title>
-        <link>http://localhost:1313/%E9%93%BE%E6%8E%A5/</link>
+        <link>https://LZ6years.github.io/%E9%93%BE%E6%8E%A5/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/%E9%93%BE%E6%8E%A5/</guid>
+        <guid>https://LZ6years.github.io/%E9%93%BE%E6%8E%A5/</guid>
         <description></description>
         </item>
         <item>
         <title>搜索</title>
-        <link>http://localhost:1313/search/</link>
+        <link>https://LZ6years.github.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/search/</guid>
+        <guid>https://LZ6years.github.io/search/</guid>
         <description></description>
         </item>
         
